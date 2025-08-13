@@ -6,51 +6,53 @@ import { generateSenderCorrelationID } from '@utils/DynamicDataGenerators';
 import { generateTransactionID } from '@utils/DynamicDataGenerators';
 import { generateTransactionTimestamp } from '@utils/DynamicDataGenerators';
 import { generateInitialCorrelationID } from '@utils/DynamicDataGenerators';
+import { loadEnvConfig } from '@test_utils/envLoader';
+import { InterfaceID } from 'constants/enum';
+import { EventTypes_IF041 } from 'constants/enum';
 
 
-// import { generateCorrelationID, generateTransactionID } from '../utils/idGenerator';
+export function buildIF041Payload(MPANCore :string,gspGroupID :string, senderRoleID :string,meterID :string,
+   cumulativeRegisterReading :string,cumulativeRegisterReadingDateTime :string, readingMethod :string, siteVisitCheckCode :string ): IF041Payload {
 
-export function buildIF041Payload(): IF041Payload {
-//   const timestamp = getUTCTimestamp();
-//   const correlationID = generateCorrelationID();
-//   const transactionID = generateTransactionID();
 
   const timestamp = '';
   const correlationID = '';
-  const transactionID = '';
+  const transactionID = ''; 
+
+const testEnvConfig = loadEnvConfig();
 
   return {
     CommonBlock: {
       M0: {
-        MPANCore: '1234567891',
-        distributorDIPID: '2500000002',
-        gspGroupID: '_N'
+        MPANCore: MPANCore,
+        distributorDIPID: testEnvConfig.distributorDipID,
+        gspGroupID: gspGroupID
       },
       S0: {
-        interfaceID: 'IF-041',
-        schemaVersion: '011',
-        eventCode: ['ReadingCos']
+        interfaceID: InterfaceID.IF041,
+        schemaVersion: testEnvConfig.schemaVersion,
+        eventCode: [EventTypes_IF041.ReadingCos]
       },
       S1: {
-        environmentTag: 'DEV',
+        environmentTag: testEnvConfig.environmentTag,
         subText: null,
-        senderUniqueReference: `S-IF-041-22000000002-REGS-${timestamp}-XYZ`,
-        senderTimestamp: timestamp,
-        senderDIPID: '22000000002',
-        senderRoleID: 'REGS',
-        senderCorrelationID: correlationID,
-        DIPConnectionProviderID: '1046217565'
+        senderUniqueReference: generateSenderUniqueReference(InterfaceID.IF041, testEnvConfig.senderDipID, senderRoleID),
+        senderTimestamp: generateSenderTimestamp(),
+        senderDIPID: testEnvConfig.senderDipID,
+        senderRoleID: senderRoleID,
+        senderCorrelationID: generateSenderCorrelationID(),
+        DIPConnectionProviderID: testEnvConfig.dipConnectionProviderID
       },
       A0: {
-        primaryRecipients: ['140000003'],
+        primaryRecipients: [testEnvConfig.sdsDipId],
         secondaryRecipients: [],
         always: []
       },
       D0: {
-        transactionID,
-        transactionTimestamp: timestamp,
-        publicationID: 'IF-041',
-        initialCorrelationID: correlationID,
+        transactionID:generateTransactionID(InterfaceID.IF041, testEnvConfig.senderDipID, senderRoleID),
+        transactionTimestamp: generateTransactionTimestamp(),
+        publicationID: InterfaceID.IF041,
+        initialCorrelationID: generateInitialCorrelationID(),
         replayIndicator: false,
         serviceTicketURL: null
       }
@@ -58,11 +60,11 @@ export function buildIF041Payload(): IF041Payload {
     CustomBlock: {
       B064List: [
         {
-          meterID: 'M1234568',
-          cumulativeRegisterReading: '1000',
-          cumulativeRegisterReadingDateTime: '24-07-2025',
-          readingMethod: 'A',
-          siteVisitCheckCode: '01'
+          meterID: meterID,
+          cumulativeRegisterReading: cumulativeRegisterReading,
+          cumulativeRegisterReadingDateTime: cumulativeRegisterReadingDateTime,
+          readingMethod: readingMethod,
+          siteVisitCheckCode: siteVisitCheckCode
         }
       ]
     }

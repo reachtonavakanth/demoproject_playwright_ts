@@ -1,9 +1,20 @@
 {
     "compilerOptions": {
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "baseUrl": "src",
         "paths": {
             "@inbound_builders/*": [
                 "../tests/builders/inbound/*"
+            ],
+               "@test_envConfigs/*": [
+                "../tests/envConfigs/*"
+            ],
+                "@test_utils/*": [
+                "../tests/utils/*"
+            ],
+                "@test_data/*": [
+                "testdata/*"
             ],
             "@inbound_commonblock/*": [
                 "types/inbound/common/*"
