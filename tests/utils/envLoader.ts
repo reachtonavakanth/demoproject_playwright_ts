@@ -1,7 +1,7 @@
 import path from 'path';
 
 export function loadEnvConfig() {
-  const env = process.env.TEST_ENV || 'test1';
+  const env = process.env.TEST_ENV || 'test02';
   const configPath = path.resolve(__dirname, '..', 'envConfigs', `${env}.config.ts`);
 
   try {
