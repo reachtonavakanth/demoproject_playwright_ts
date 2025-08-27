@@ -4,30 +4,27 @@
         "esModuleInterop": true,
         "baseUrl": "src",
         "paths": {
-            "@inbound_builders/*": [
-                "../tests/builders/inbound/*"
+           "@requests_types/*": [
+                "types/requests/*"
             ],
-               "@test_envConfigs/*": [
-                "../tests/envConfigs/*"
+               "@response_types/*": [
+                "types/responses/*"
             ],
-                "@test_utils/*": [
+               "@response_schema/*": [
+                "responseSchemas/*"
+            ],
+            "@response_validators/*": [
+                "responseValidators/*"
+            ],
+            "@requests_payload/*": [
+                "../tests/payloadbuilders/requests/*"
+            ],
+            "@api_fixtures/*": [
+                "../tests/fixtures/*"
+            ],
+             "@test_utils/*": [
                 "../tests/utils/*"
             ],
-                "@test_data/*": [
-                "testdata/*"
-            ],
-            "@inbound_commonblock/*": [
-                "types/inbound/common/*"
-            ],
-            "@inbound_customblocks/*": [
-                "types/inbound/custom/*"
-            ],
-            "@inbound_payloads/*": [
-                "types/inbound/payload/*"
-            ],
-            "@utils/*": [
-                "utils/*"
-            ]
         }
     }
 }

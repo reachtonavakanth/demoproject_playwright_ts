@@ -2,7 +2,7 @@ import path from 'path';
 
 export function loadEnvConfig() {
   const env = process.env.TEST_ENV || 'test02';
-  const configPath = path.resolve(__dirname, '..', 'envConfigs', `${env}.config.ts`);
+  const configPath = path.resolve(__dirname, '..', 'envConfigs', `${env}.config.js`);
 
   try {
     return require(configPath).envConfig;
