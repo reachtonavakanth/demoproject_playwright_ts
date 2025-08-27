@@ -5,8 +5,6 @@ import { faker } from '@faker-js/faker';
 
 export function buildUserRegistrationRequest(): UserRegistrationPayload {
 
-  const testEnvConfig = loadEnvConfig();
-
   return {
     ApplicantBlock:
     {

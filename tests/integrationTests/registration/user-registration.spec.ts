@@ -1,10 +1,6 @@
 import { test, expect } from '@api_fixtures/ApiFixtures';
 import { buildUserRegistrationRequest } from '@requests_payload/registration/user-registration';
-// import testData from '@test_data/inbound/if-041/readingcos.json';
-import { loadEnvConfig } from '@test_utils/envLoader';
 import {validateRegistrationResponse} from '@response_validators/registration/ValidateUserRegistrationResponse';
-
-const testEnvConfig = loadEnvConfig();
 
 test('verify demo-user-registration', async ({ apiContext, apiUrl, apiHeaders }) => {
   const endpoint = 'demo-user-registration';
