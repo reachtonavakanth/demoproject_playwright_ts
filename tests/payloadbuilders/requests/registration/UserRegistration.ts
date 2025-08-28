@@ -1,4 +1,4 @@
-import { UserRegistrationPayload } from '@requests_types/registration/user-registration';
+import { UserRegistrationPayload } from '@requests_types/registration/UserRegistration';
 import { loadEnvConfig } from '@test_utils/envLoader';
 import { faker } from '@faker-js/faker';
 
