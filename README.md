@@ -41,7 +41,7 @@ This repository explores how to achieve this, with a strong focus on:
 - **Types**: Defined in `src/types/requests/registration/`
 - **Payload Builders**: Located in `tests/payloadbuilders/requests/registration/`
 - **Tests**: Under `tests/integrationTests/registration/`
-- **Response Validators**: `src/responseValidators/registration/`
+- **Response Schemas**: `src/response-schemas/registration/`
 - **Config**: Centralized in `playwright.config.ts` with utility loaders and environment configs
 
 ### Installing Dependencies
@@ -181,7 +181,7 @@ test('verify demo-user-registration', async ({ apiContext, apiUrl, apiHeaders })
 **What’s Happening Here?**
 - Payload is always generated via the builder, guaranteeing its correctness.
 - Test attaches both request and response for traceability in reports.
-- Response is validated against a zod schema (`RegistrationResponseSchema`), ensuring backend API stays contract-compliant.
+- Response schema is validated using Ajv to ensure backend API stays contract-compliant.
 
 ---
 
@@ -189,7 +189,7 @@ test('verify demo-user-registration', async ({ apiContext, apiUrl, apiHeaders })
 
 - **Type Everything**: Never send or expect untyped data. Types are your contract.
 - **Reusable Builders**: Centralize payload generation logic. Helps for both positive and negative test scenarios.
-- **Schema Validation**: Use libraries like [zod](https://zod.dev/) to enforce response structure.
+- **Schema Validation**: Use libraries like [Ajv](https://ajv.js.org) to enforce response structure.
 - **Separation of Concerns**: Types, payload logic, validators, and tests are in separate folders/files for maximum maintainability.
 - **Environment Management**: Use environment loaders (`envLoader.ts`) and config files for easy switching/testing.
 - **Reporting & Observability**: Attach requests/responses to test reports for easy debugging and audit trails.
