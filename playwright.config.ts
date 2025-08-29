@@ -1,31 +1,22 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
+
 export default defineConfig({
-timeout: 30 * 1000, //30000 ms(30 secs)
-testDir: './tests',
-fullyParallel: false,
-//retries: process.env.CI ? 2 : 0,
-// retries:1,
-// workers: process.env.CI ? 1 : undefined,
-workers: 1,
-reporter: [
-['html'],
-['allure-playwright'],
-['dot'],
-['list']
-],
-use: {
-trace: 'on-first-retry',
-screenshot: 'only-on-failure',
-video: 'retain-on-failure',
-//headless: false,
-viewport: { width: 1280, height: 720 }, // Set default viewport size for consistency
-ignoreHTTPSErrors: true, // Ignore SSL errors if necessary
-permissions: ['geolocation'], // Set necessary permissions for geolocation-based tests
-},
-//grep: /@master/,
-projects: [
-{name: 'chromium',use: { ...devices['Desktop Chrome'] },},
-// {name: 'firefox',use: { ...devices['Desktop Firefox'] },},
-// {name: 'webkit',use: { ...devices['Desktop Safari'] },} 
-],
+  timeout: 30 * 1000,           // 30 seconds per test
+  testDir: './tests',           // Directory containing your tests
+  fullyParallel: false,         // Run tests in the same worker
+  workers: 1,                   // Single worker for consistent results
+  reporter: [
+    ['html'],                   // HTML report
+    ['allure-playwright'],      // Allure report
+    ['dot'],                    // Dot reporter in console
+    ['list']                    // List reporter in console
+  ],
+  use: {
+    trace: 'on-first-retry',    // Capture trace only on first retry
+  },
+  projects: [
+    {
+      name: 'Demo API Tests',        // Project name will appear in reports
+    },
+  ],
 });
