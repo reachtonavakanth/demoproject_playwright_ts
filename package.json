@@ -11,7 +11,9 @@
     "@faker-js/faker": "^10.0.0",
     "@playwright/test": "^1.54.2",
     "@types/node": "^24.2.1",
-    "allure-playwright": "^3.3.3"
+    "ajv": "^8.17.1",
+    "allure-playwright": "^3.3.3",
+    "playwright": "^1.55.0"
   },
   "dependencies": {
     "date-fns": "^4.1.0",

@@ -1,6 +1,10 @@
 import { test, expect } from '@api_fixtures/ApiFixtures';
-import { buildUserRegistrationRequest } from '@requests_payload/registration/user-registration';
-import {validateRegistrationResponse} from '@response_validators/registration/ValidateUserRegistrationResponse';
+import { buildUserRegistrationRequest } from '@requests_payload/registration/UserRegistration';
+import Ajv from 'ajv';
+import path from "path";
+import fs from "fs";
+
+
 
 test('verify demo-user-registration', async ({ apiContext, apiUrl, apiHeaders }) => {
   const endpoint = 'demo-user-registration';
@@ -21,6 +25,8 @@ test('verify demo-user-registration', async ({ apiContext, apiUrl, apiHeaders })
   console.log(response)
 
   expect(response.ok()).toBeTruthy();
+  expect(responseBody.status).toBe('SUCCESS');
+
   test.info().attach('Response_demo-user-registration', {
     body: JSON.stringify(responseBody),
     contentType: 'application/json',
@@ -45,10 +51,25 @@ test('verify demo-user-registrations api schema', async ({ apiContext, apiUrl, a
   const responseBody = await response.json();
   console.log(response)
 
-  validateRegistrationResponse(response);
-  expect(response.status).toBe('SUCCESS');
+  const schemaPath = path.resolve(
+    process.cwd(),
+    "src",
+    "response-schemas",
+    "registration",
+    "user-registration.json"
+  );
 
-  expect(response.ok()).toBeFalsy();
+  console.log("schemaPath ---> "+schemaPath)
+  const schema = JSON.parse(fs.readFileSync(schemaPath, "utf-8"));
+
+
+  const ajv = new Ajv();
+  const validate = ajv.compile(schema);
+  const isValid = validate(responseBody);
+
+  expect(isValid).toBeTruthy();
+
+
   test.info().attach('Response_demo-user-registration', {
     body: JSON.stringify(responseBody),
     contentType: 'application/json',
