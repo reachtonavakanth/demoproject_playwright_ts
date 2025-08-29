@@ -33,7 +33,7 @@ test('verify demo-user-registration', async ({ apiContext, apiUrl, apiHeaders })
   });
 });
 
-test('verify demo-user-registrations api schema', async ({ apiContext, apiUrl, apiHeaders }) => {
+test('verify demo-user-registration api schema', async ({ apiContext, apiUrl, apiHeaders }) => {
   const endpoint = 'demo-user-registration';
 
   let payload;
